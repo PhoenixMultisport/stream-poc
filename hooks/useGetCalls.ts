@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk'
 
 export const useGetCalls = () => {
-  const user = { id: '192335c6-5866-4559-9948-b4c12a307d40', username: 'John Doe' }
+  const user = { id: process.env.NEXT_PUBLIC_STREAM_USER_ID!, username: process.env.NEXT_PUBLIC_STREAM_USER_NAME! }
   const client = useStreamVideoClient()
   const [calls, setCalls] = useState<Call[]>()
   const [isLoading, setIsLoading] = useState(false)

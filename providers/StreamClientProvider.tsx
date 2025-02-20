@@ -11,8 +11,8 @@ const API_KEY = process.env.NEXT_PUBLIC_STREAM_API_KEY
 const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
   const [videoClient, setVideoClient] = useState<StreamVideoClient>()
   const user = {
-    id: '192335c6-5866-4559-9948-b4c12a307d40',
-    username: 'John Doe',
+    id: process.env.NEXT_PUBLIC_STREAM_USER_ID!,
+    username: process.env.NEXT_PUBLIC_STREAM_USER_NAME!,
     imageUrl: 'https://placehold.co/100x100'
   }
   const isLoaded = true

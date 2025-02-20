@@ -18,7 +18,7 @@ const Table = ({ title, description }: { title: string; description: string }) =
 
 const PersonalRoom = () => {
   const router = useRouter()
-  const user = { id: '192335c6-5866-4559-9948-b4c12a307d40', username: 'John Doe' }
+  const user = { id: process.env.NEXT_PUBLIC_STREAM_USER_ID!, username: process.env.NEXT_PUBLIC_STREAM_USER_NAME! }
   const client = useStreamVideoClient()
   const { toast } = useToast()
 

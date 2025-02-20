@@ -12,7 +12,7 @@ import MeetingRoom from '@/components/MeetingRoom'
 
 const MeetingPage = () => {
   const { id } = useParams()
-  const user = { id: '192335c6-5866-4559-9948-b4c12a307d40', username: 'John Doe' }
+  const user = { id: process.env.NEXT_PUBLIC_STREAM_USER_ID!, username: process.env.NEXT_PUBLIC_STREAM_USER_NAME! }
   const isLoaded = true
   const { call, isCallLoading } = useGetCallById(id!)
   const [isSetupComplete, setIsSetupComplete] = useState(false)

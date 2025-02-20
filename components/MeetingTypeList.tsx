@@ -23,7 +23,7 @@ const MeetingTypeList = () => {
   const [values, setValues] = useState(initialValues)
   const [callDetail, setCallDetail] = useState<Call>()
   const client = useStreamVideoClient()
-  const user = { id: '192335c6-5866-4559-9948-b4c12a307d40', username: 'John Doe' }
+  const user = { id: process.env.NEXT_PUBLIC_STREAM_USER_ID!, username: process.env.NEXT_PUBLIC_STREAM_USER_NAME! }
   const { toast } = useToast()
 
   const createMeeting = async () => {
@@ -36,9 +36,19 @@ const MeetingTypeList = () => {
       const id = crypto.randomUUID()
       const call = client.call('default', id)
       if (!call) throw new Error('Failed to create meeting')
-      const startsAt = values.dateTime.toISOString() || new Date(Date.now()).toISOString()
+      const startsAt = values.dateTime.toISOString() || new Date(Date.now()  + 500 * 1000).toISOString()
       const description = values.description || 'Instant Meeting'
-      await call.getOrCreate({ data: { starts_at: startsAt, custom: { description } } })
+      await call.getOrCreate({ data: { 
+        starts_at: startsAt, 
+        members: [{ user_id: user.id, role: "host" }],
+        custom: { description },
+        settings_override: {
+          backstage: {
+            enabled: true
+            },
+          },
+        },
+      })
       setCallDetail(call)
       if (!values.description) {
         router.push(`/meeting/${call.id}`)
